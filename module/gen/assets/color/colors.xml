@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#7286D3</color>
+    <color name="primary2">#8EA7E9</color>
+    <color name="primary3">#E5E0FF</color>
+    <color name="primary4">#FFF2F2</color>
+    <color name="background_primary">#131624</color>
+    <color name="background_secondary">#1C2136</color>
+    <color name="alert_success">#2DBB2A</color>
+    <color name="alert_danger">#DB1616</color>
+    <color name="alert_info">#3CA1FF</color>
+    <!-- <color name="background_primary" type="material">#CF2A2A</color> -->
+    <!-- <color name="background_secondary" type="material material-accent">#DF9527</color> -->
+</resources>
