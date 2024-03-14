@@ -5,6 +5,7 @@ import 'package:flutter_modular_mvvm/feature/splash/view_model/cubit/splash_cubi
 import 'package:flutter_modular_mvvm/feature/splash/view_model/mixin/splash_view_model_mixin.dart';
 import 'package:flutter_modular_mvvm/feature/splash/view_model/state/splash_state.dart';
 import 'package:flutter_modular_mvvm/product/service/interface/splash_operation.dart';
+import 'package:flutter_modular_mvvm/product/utility/process/parallel_task_processor.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:utility/utility.dart';
 

@@ -23,7 +23,7 @@ final class Multiple2TaskProcessor<T, R> {
     final firstTaskResult = firstTask();
     final secondTaskResult = secondTask();
 
-    return Multiple2TaskProcessorResult(
+    return Multiple2TaskProcessorResult<T, R>(
       firstTaskResult: await firstTaskResult,
       secondTaskResult: await secondTaskResult,
     );
