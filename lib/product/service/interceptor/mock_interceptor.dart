@@ -6,11 +6,21 @@ import 'package:flutter_modular_mvvm/product/service/mock/mock_response_type.dar
 import 'package:flutter_modular_mvvm/product/widget/alert/project_snackbar.dart';
 import 'package:vexana/vexana.dart';
 
+import '../manager/token_manager.dart';
+
 /// A mock interceptor that implements the [Interceptor] interface.
 class MockInterceptor implements Interceptor {
   final _jsonDir = 'assets/mock/';
 
   final _responseType = MockResponseType.success;
+
+  RequestOptions? lastRequestOptions;
+  bool tryLimiterOn = false;
+
+  /// Constructor for ProdInterceptor
+  MockInterceptor(this._tokenManager);
+
+  final TokenManager _tokenManager;
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
@@ -26,7 +36,9 @@ class MockInterceptor implements Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    log('--------------------------------------------');
+    lastRequestOptions = options;
+    handler.next(options);
+    /* log('--------------------------------------------');
     log('MockInterceptor.onRequest [URI]: ${options.uri}');
     log('MockInterceptor.onRequest [METHOD]: ${options.method}');
     log('MockInterceptor.onRequest [DATA]: ${options.data}');
@@ -50,12 +62,31 @@ class MockInterceptor implements Interceptor {
         ),
         true,
       );
-    }
+    } */
   }
 
   @override
   void onResponse(
     Response<dynamic> response,
     ResponseInterceptorHandler handler,
-  ) {}
+  ) async {
+    print('MockInterceptor.onResponse [STATUS CODE]: ${response.statusCode}');
+    response = Response(
+      requestOptions: RequestOptions(path: 'path'),
+      statusCode: 401,
+      data: {"id": "1"},
+    );
+    Response<dynamic> newResponse = await _tokenManager.tokenAuthorizer(
+      response: response,
+      options: response.requestOptions,
+    );
+    print('MockInterceptor.onResponse [STATUS CODE]: ${response.statusCode}');
+    handler.next(
+      Response(
+        requestOptions: RequestOptions(path: 'path'),
+        statusCode: 401,
+        data: {"id": "1"},
+      ),
+    );
+  }
 }

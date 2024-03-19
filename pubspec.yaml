@@ -49,7 +49,7 @@ dependencies:
   easy_logger: ^0.0.2
   logger: ^2.0.2+1
   kartal: ^3.5.0
-  google_fonts: ^6.1.0
+  google_fonts: 6.0.0
 
   #Navigation
   auto_route: ^7.8.4
@@ -80,7 +80,7 @@ dev_dependencies:
   auto_route_generator: ^7.3.2
   build_runner: ^2.4.6
   device_preview: ^1.1.0
-  mockito: ^5.4.2
+  mockito: ^5.4.4
   bloc_test: ^9.1.4
   patrol: ^2.3.1
 
