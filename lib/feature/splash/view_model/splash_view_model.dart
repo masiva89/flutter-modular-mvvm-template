@@ -16,7 +16,13 @@ class SplashViewModel extends SplashCubit with SplashViewModelMixin {
   SplashViewModel({
     required SplashOperation splashOperation,
   })  : _splashOperation = splashOperation,
-        super(const SplashState(isLoading: true));
+        super(SplashState.createState());
+  SplashViewModel.initial({
+    required SplashOperation splashOperation,
+  })  : _splashOperation = splashOperation,
+        super(SplashState.createState()) {
+    initialEvent();
+  }
 
   final SplashOperation _splashOperation;
 

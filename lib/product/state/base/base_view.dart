@@ -97,11 +97,7 @@ class _BaseViewState<T extends BaseCubit<R>, R extends StateEquatable>
       return const CustomLoading();
     }
     if (state.status == StateType.ERROR) {
-      return ProjectErrorStateView(
-        onRetry: () {
-          context.read<T>().initialEvent();
-        },
-      );
+      return ProjectErrorStateView(onRetry: context.read<T>().initialEvent);
     }
     return IgnorePointer(
       ignoring: state.isLoading,
