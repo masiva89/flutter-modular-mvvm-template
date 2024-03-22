@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular_mvvm/feature/splash/view/splash_view.dart';
 import 'package:flutter_modular_mvvm/feature/splash/view_model/splash_view_model.dart';
 import 'package:flutter_modular_mvvm/product/service/features/splash/splash_service.dart';
 import 'package:flutter_modular_mvvm/product/service/index.dart';
