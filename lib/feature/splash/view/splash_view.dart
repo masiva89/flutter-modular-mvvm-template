@@ -18,7 +18,15 @@ class SplashView extends StatelessWidget with SplashViewMixin {
     return BaseView<SplashViewModel, SplashState>(
       onInitialize: (ctx) {},
       vmBuilder: splashViewModelBuilder,
-      builder: (ctx, vm, state) => Scaffold(body: Center(child: SplashLogo())),
+      builder: (ctx, vm, state) => Scaffold(
+        body: Center(
+          child: SplashLogo(
+            vm: vm,
+            state: state,
+            useShimmer: false,
+          ),
+        ),
+      ),
     );
   }
 }

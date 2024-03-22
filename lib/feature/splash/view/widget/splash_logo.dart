@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular_mvvm/product/state/base/base_equatable.dart';
 import 'package:flutter_modular_mvvm/product/state/base/observable_widget.dart';
+import 'package:gen/gen.dart';
+import 'package:kartal/kartal.dart';
 
 import '../../../../product/state/index.dart';
 
@@ -10,13 +12,11 @@ class SplashLogo<T extends BaseCubit<R>, R extends StateEquatable>
     super.key,
     required this.vm,
     required this.state,
-    required this.child,
     required this.useShimmer,
   });
 
   final T vm;
   final R state;
-  final Widget child;
   final bool useShimmer;
 
   @override
@@ -35,7 +35,12 @@ class SplashLogo<T extends BaseCubit<R>, R extends StateEquatable>
           true => Text('Shimmer Loading'),
           false => Text('Loading'),
         },
-      StateType.SUCCESS => child,
+      StateType.SUCCESS => Assets.lottie.animSplashLogo.lottie(
+          package: 'gen',
+          fit: BoxFit.cover,
+          repeat: false,
+          width: context.general.mediaSize.width,
+        ),
     };
   }
 }
