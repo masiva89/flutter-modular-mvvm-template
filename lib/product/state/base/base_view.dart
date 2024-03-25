@@ -10,10 +10,14 @@ import 'package:flutter_modular_mvvm/product/widget/loading/product_loading_over
 import 'package:flutter_modular_mvvm/product/widget/state/project_error_state_view.dart';
 import 'package:flutter_modular_mvvm/product/widget/state/unauthorized_state_info_view.dart';
 
+typedef WidgetBuilder<T, R> = Widget Function(BuildContext, T, R);
+typedef ViewModelBuilder<T> = T Function(BuildContext);
+typedef InitializeCallback = void Function(BuildContext);
+typedef DisposeCallback = void Function(BuildContext);
+typedef PostFrameCallback = void Function(BuildContext);
+
 /// Base class for views that are connected to a [BaseCubit] and use
 /// [StateEquatable] as the state.
-///
-///
 class BaseView<T extends BaseCubit<R>, R extends StateEquatable>
     extends StatefulWidget {
   /// Creates a new [BaseView] instance.
@@ -30,6 +34,8 @@ class BaseView<T extends BaseCubit<R>, R extends StateEquatable>
   /// default loading widget will be used.
   const BaseView({
     this.onInitialize,
+    this.onDispose,
+    this.onPostFrame,
     this.vmBuilder,
     this.builder,
     this.useDefaultLoading = true,
@@ -41,13 +47,19 @@ class BaseView<T extends BaseCubit<R>, R extends StateEquatable>
         );
 
   /// The function that creates an instance of [BaseCubit].
-  final T Function(BuildContext context)? vmBuilder;
+  final ViewModelBuilder<T>? vmBuilder;
 
   /// The function that builds the UI based on the [BuildContext] and the
-  final Widget Function(BuildContext, T, R)? builder;
+  final WidgetBuilder<T, R>? builder;
 
   /// The function that will be called when the view before initialized.
-  final Function(BuildContext)? onInitialize;
+  final InitializeCallback? onInitialize;
+
+  /// The function that will be called when the view is disposed.
+  final DisposeCallback? onDispose;
+
+  /// The function that will be called after the view is initialized.
+  final PostFrameCallback? onPostFrame;
 
   /// A boolean value that indicates whether the default loading widget should
   /// be used.
@@ -66,6 +78,15 @@ class _BaseViewState<T extends BaseCubit<R>, R extends StateEquatable>
   void initState() {
     super.initState();
     widget.onInitialize?.call(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onPostFrame?.call(context);
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.onDispose?.call(context);
+    super.dispose();
   }
 
   @override
