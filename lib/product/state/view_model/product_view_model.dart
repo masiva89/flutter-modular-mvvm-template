@@ -7,10 +7,18 @@ import 'package:flutter_modular_mvvm/product/state/view_model/product_state.dart
 final class ProductViewModel extends BaseCubit<ProductState>
     with AuthCacheCubitMixin {
   /// [ProductViewModel] constructor.
-  ProductViewModel() : super(const ProductState());
+  ProductViewModel() : super(ProductState());
+  ProductViewModel.initialize(ProductState state) : super(state) {
+    emit(state);
+    initialEvent();
+  }
 
   @override
   void initialEvent({BuildContext? context}) {}
+
+  void changeLoading(bool isLoading) {
+    emit(state.copyWith(isLoading: isLoading));
+  }
 
   /// Change theme mode
   /// [themeMode] can be [ThemeMode.light] or [ThemeMode.dark]

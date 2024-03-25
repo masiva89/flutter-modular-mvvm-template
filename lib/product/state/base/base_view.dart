@@ -38,6 +38,7 @@ class BaseView<T extends BaseCubit<R>, R extends StateEquatable>
     this.onPostFrame,
     this.vmBuilder,
     this.builder,
+    this.isAppWrapper = false,
     this.useDefaultLoading = true,
     this.authGuardEnabled = false,
     super.key,
@@ -68,6 +69,9 @@ class BaseView<T extends BaseCubit<R>, R extends StateEquatable>
   /// A boolean value that indicates whether the auth guard is enabled.
   final bool authGuardEnabled;
 
+  /// A boolean value that indicates whether the view is an app wrapper.
+  final bool isAppWrapper;
+
   @override
   _BaseViewState createState() => _BaseViewState<T, R>();
 }
@@ -94,9 +98,15 @@ class _BaseViewState<T extends BaseCubit<R>, R extends StateEquatable>
     return switch (widget.authGuardEnabled) {
       true => switch (productViewModel.userAuthStatus == UserStatus.loggedIn) {
           false => _unauthorizedInfoView,
-          true => _defaultView,
+          true => switch (widget.isAppWrapper) {
+              false => _defaultView,
+              true => _appWrapperView,
+            },
         },
-      false => _defaultView,
+      false => switch (widget.isAppWrapper) {
+          false => _defaultView,
+          true => _appWrapperView,
+        }
     };
   }
 
@@ -108,6 +118,49 @@ class _BaseViewState<T extends BaseCubit<R>, R extends StateEquatable>
       ),
     );
   }
+
+  Widget get _appWrapperView {
+    return BlocConsumer<T, R>(
+      listener: (context, state) {
+        if (state.status == StateType.ERROR) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('An error occurred'),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: Stack(
+            children: [
+              widget.builder!(context, context.watch<T>(), state),
+              if (state.isLoading) const ProductLoadingOverlay(),
+              if (state.status == StateType.ERROR)
+                const ProjectErrorStateView(),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /* Widget get _appWrapperView {
+    return BlocBuilder<T, R>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Stack(
+            children: [
+              widget.builder!(context, context.watch<T>(), state),
+              if (state.isLoading) const ProductLoadingOverlay(),
+              if (state.status == StateType.ERROR)
+                const ProjectErrorStateView(),
+            ],
+          ),
+        );
+      },
+    );
+  } */
 
   Widget get _unauthorizedInfoView => const UnauthorizedInfoView();
 
