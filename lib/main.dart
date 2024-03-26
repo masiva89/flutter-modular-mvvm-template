@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // You should use this returned widget instead of the active one.
+    // You should use this returned widget instead of the active one after the
+    // implementing and building the routing system with AutoRoute.
+
     /* return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
