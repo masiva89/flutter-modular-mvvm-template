@@ -1,5 +1,6 @@
 import 'package:flutter_modular_mvvm/feature/splash/view_model/state/splash_state.dart';
-import 'package:flutter_modular_mvvm/product/state/index.dart';
+
+import '../../../../product/base/index.dart';
 
 /// A cubit that handles the state management for the splash screen.
 ///

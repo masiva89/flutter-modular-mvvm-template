@@ -1,15 +1,15 @@
 import 'dart:developer';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_logger/easy_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular_mvvm/feature/splash/view_model/state/splash_state.dart';
 import 'package:flutter_modular_mvvm/product/cache/index.dart';
-import 'package:flutter_modular_mvvm/product/navigation/app_router.dart';
 import 'package:flutter_modular_mvvm/product/navigation/guard/enum/user_status.dart';
 import 'package:flutter_modular_mvvm/product/state/index.dart';
 import 'package:flutter_modular_mvvm/product/widget/dialog/project_dialog.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+import '../../../../product/base/index.dart';
 
 /// A mixin that provides common functionality for the SplashViewModel.
 /// It is used in conjunction with the BaseCubit<SplashState> class.

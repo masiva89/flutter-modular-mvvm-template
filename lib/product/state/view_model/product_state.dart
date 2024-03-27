@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular_mvvm/product/state/base/base_equatable.dart';
+import 'package:flutter_modular_mvvm/product/base/state/base_equatable.dart';
 
 /// [ProductState] is a state for the product module.
 final class ProductState extends StateEquatable {

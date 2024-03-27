@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'base_equatable.dart';
-import 'index.dart';
+import '../state/base_equatable.dart';
+import '../viewmodel/base_cubit.dart';
 
 class ObservableWidget<T extends BaseCubit<R>, R extends StateEquatable>
     extends StatelessWidget {
@@ -24,9 +24,7 @@ class ObservableWidget<T extends BaseCubit<R>, R extends StateEquatable>
     return BlocConsumer<T, R>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (onInitialize != null) {
-          onInitialize!(context);
-        }
+        if (onInitialize != null) onInitialize!(context);
         return builder(context, vm, state);
       },
     );

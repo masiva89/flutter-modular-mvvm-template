@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular_mvvm/product/state/base/base_equatable.dart';
-import 'package:flutter_modular_mvvm/product/state/base/observable_widget.dart';
 import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 
-import '../../../../product/state/index.dart';
+import '../../../../product/base/index.dart';
 
 class SplashLogo<T extends BaseCubit<R>, R extends StateEquatable>
     extends StatelessWidget {

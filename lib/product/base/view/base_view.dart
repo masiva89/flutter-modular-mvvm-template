@@ -2,13 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular_mvvm/product/utility/listener/manager/state_listener_manager.dart';
+import 'package:flutter_modular_mvvm/product/base/listener/state_error_lsitener.dart';
 import 'package:flutter_modular_mvvm/product/navigation/guard/enum/user_status.dart';
-import 'package:flutter_modular_mvvm/product/state/base/base_equatable.dart';
-import 'package:flutter_modular_mvvm/product/state/index.dart';
+import 'package:flutter_modular_mvvm/product/base/state/base_equatable.dart';
 import 'package:flutter_modular_mvvm/product/widget/loading/custom_loading.dart';
 import 'package:flutter_modular_mvvm/product/widget/loading/product_loading_overlay.dart';
 import 'package:flutter_modular_mvvm/product/widget/state/project_error_state_view.dart';
 import 'package:flutter_modular_mvvm/product/widget/state/unauthorized_state_info_view.dart';
+
+import '../state/base_state.dart';
+import '../viewmodel/base_cubit.dart';
 
 typedef WidgetBuilder<T, R> = Widget Function(BuildContext, T, R);
 typedef ViewModelBuilder<T> = T Function(BuildContext);
@@ -121,15 +125,7 @@ class _BaseViewState<T extends BaseCubit<R>, R extends StateEquatable>
 
   Widget get _appWrapperView {
     return BlocConsumer<T, R>(
-      listener: (context, state) {
-        if (state.status == StateType.ERROR) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('An error occurred'),
-            ),
-          );
-        }
-      },
+      listener: BlocListenerManager.getListener<R>(StateErrorListener()),
       builder: (context, state) {
         return Scaffold(
           body: Stack(

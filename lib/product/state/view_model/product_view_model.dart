@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular_mvvm/product/cache/mixin/auth_cache_cubit_mixin.dart';
-import 'package:flutter_modular_mvvm/product/state/base/base_cubit.dart';
+import 'package:flutter_modular_mvvm/product/base/viewmodel/base_cubit.dart';
 import 'package:flutter_modular_mvvm/product/state/view_model/product_state.dart';
 
 /// [ProductViewModel] is a view model for the product module.

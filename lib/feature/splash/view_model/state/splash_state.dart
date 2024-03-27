@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_modular_mvvm/product/state/base/base_equatable.dart';
+import 'package:flutter_modular_mvvm/product/base/state/base_equatable.dart';
 
 /// Represents the state of the splash screen.
 class SplashState extends StateEquatable {

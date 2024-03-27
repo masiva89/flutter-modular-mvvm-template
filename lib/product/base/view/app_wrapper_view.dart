@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular_mvvm/product/state/base/base_view.dart';
+import 'package:flutter_modular_mvvm/product/base/view/base_view.dart';
 import 'package:flutter_modular_mvvm/product/state/index.dart';
 
 class AppWrapperView extends StatelessWidget {
