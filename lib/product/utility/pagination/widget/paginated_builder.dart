@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_modular_mvvm/product/utility/pagination/controller/pagination_controller.dart';
 import 'package:flutter_modular_mvvm/product/utility/pagination/pagination_debouncer.dart';
 
 class PaginatedBuilder extends StatefulWidget {
@@ -24,29 +25,22 @@ class PaginatedBuilder extends StatefulWidget {
 class _PaginatedBuilderState extends State<PaginatedBuilder> {
   late ScrollController controller;
   late PaginationDebouncer debouncer;
+  late PaginationController paginationController;
 
   @override
   void initState() {
     super.initState();
-    controller = ScrollController();
-    debouncer = PaginationDebouncer(waitTime: widget.debouncerWaitDuration);
-  }
-
-  bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification) {
-      if (controller.position.extentAfter == 0) {
-        debouncer.debounce(() {
-          widget.onFetchMore();
-        });
-      }
-    }
-    return false;
+    paginationController = PaginationController(
+      onFetchMore: widget.onFetchMore,
+      waitTime: widget.debouncerWaitDuration,
+      controller: controller,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
-      onNotification: _handleScrollNotification,
+      onNotification: paginationController.handleScrollNotification,
       child: widget.builder(context, controller),
     );
   }

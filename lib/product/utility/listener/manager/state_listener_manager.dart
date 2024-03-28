@@ -16,8 +16,8 @@ class BlocListenerManager {
   ///
   /// Example:
   /// ```dart
-  /// return BlocConsumer<T, R>(
-  ///   listener: ListenerManager.getListener<R>(StateErrorListener()),
+  /// return BlocConsumer<HomeBloc, HomeState>(
+  ///   listener: ListenerManager.getListener<HomeState>(StateErrorListener()),
   ///   builder: (context, state) {
   ///     return child;
   ///   },
