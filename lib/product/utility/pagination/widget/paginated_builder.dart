@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular_mvvm/product/utility/pagination/controller/pagination_controller.dart';
-import 'package:flutter_modular_mvvm/product/utility/pagination/pagination_debouncer.dart';
+import 'package:flutter_modular_mvvm/product/utility/pagination/debouncer/pagination_debouncer.dart';
 
 class PaginatedBuilder extends StatefulWidget {
   final Widget Function(

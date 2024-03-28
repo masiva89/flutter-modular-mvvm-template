@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../pagination_debouncer.dart';
-
-typedef PaginationDebouncerCallback = void Function();
+import '../pagination.dart';
 
 final class PaginationController {
   PaginationDebouncer debouncer;
